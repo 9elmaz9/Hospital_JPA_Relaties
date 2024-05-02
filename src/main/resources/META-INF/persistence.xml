@@ -3,9 +3,9 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class></class>
-        <class></class>
-
+        <class>intecbrussel.be.model.MedicalFile</class>
+        <class>intecbrussel.be.model.Patient</class>
+        <class>intecbrussel.be.Main</class>
 
 
 

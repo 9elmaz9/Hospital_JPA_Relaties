@@ -1,17 +1,39 @@
-package org.example;
+package intecbrussel.be;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+import intecbrussel.be.model.MedicalFile;
+import intecbrussel.be.model.Patient;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // Массив с именами пациентов
+        String[] names = {"Richard", "Marry", "Lila", "Daniel", "Erica"};
+        // Массив с болезнями
+        String[] illnesses = {"Sinusitis ", "Common cold", "Headache", "Gastroenteritis ", "Flu"};
+// create 5 patients and скуйеу  medicalfiles for them
+        // Создаем 5 пациентов и для каждого создаем медицинскую карту
+        for (int i = 0; i < 5; i++) {
+            Patient patient = new Patient();
+            patient.setRijksregisternummer("123456789" + (i + 1));
+            patient.setNaam(names[i]);
+            patient.setSick(i % 2 == 0); // Четные пациенты больны, нечетные - здоровы
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+            MedicalFile medicalFile = new MedicalFile();
+            medicalFile.setId(i + 1);
+            medicalFile.setPatient(patient);
+            medicalFile.setIllness(patient.isSick() ? illnesses[i] : "Healthy");
+
+            patient.setMedicalFile(medicalFile);
+
+            // Выводим информацию о пациенте и его медицинской карте
+            System.out.println("Patient " + (i + 1) + ":");
+            System.out.println("Name: " + patient.getNaam());
+            System.out.println("Rijksregisternummer: " + patient.getRijksregisternummer());
+            System.out.println("Sick: " + patient.isSick());
+            System.out.println("Medical File ID: " + medicalFile.getId());
+            System.out.println("Illness: " + medicalFile.getIllness());
+            System.out.println();
         }
     }
+
 }
